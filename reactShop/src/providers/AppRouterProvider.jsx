@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Basket from "../components/basket";
-import FinalBasket from "../components/finalBasket";
+// import Basket from "../components/basket";
+// import FinalBasket from "../components/finalBasket";
 import Paymentgateway from "../components/paymentgateway";
-import ProductManaging from "../components/productManaging";
+// import ProductManaging from "../components/productManaging";
 import AdminPanel from "../pages/adminPanel";
 import Auth from '../pages/auth/index'
 import Home from "../pages/home";
