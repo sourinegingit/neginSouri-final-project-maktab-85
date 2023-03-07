@@ -5,14 +5,14 @@ import React from 'react'
 // import { Route, Routes } from 'react-router-dom'
 // import Basket from '../../components/basket'
 // import FinalBasket from '../../components/finalBasket'
-import ProductManaging from '../../components/productManaging'
+import ProductManaging from '../../components/admin/tabs/productManaging'
 import PanelAdminHeader from '../../layouts/PanelAdminHeader'
 
 const AdminPanel = () => {
   return (
     <div>
  <PanelAdminHeader/>
- <ProductManaging/>
+ {/* <ProductManaging/> */}
  {/* <StockPriceManagment/> */}
  {/* <OrdersManaging/> */}
      
