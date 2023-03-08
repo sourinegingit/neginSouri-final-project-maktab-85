@@ -1,27 +1,30 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import RadioButtons from "../../filter";
+// import Http from "../../../../config";
 
 const OrdersManaging = () => {
   const [modal, setModal] = useState(false);
+  const [orderData, setOrderData] = useState([]);
   const HandleModal = () => {
     setModal(!modal);
   };
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/orders").then((res) =>
+      // console.log(res.data)
+      setOrderData(res.data)
+    );
+  }, []);
+
   return (
     <div>
       <div className="flex justify-between items-center text-pink-800  text-xl w-[70%] -mt-10 m-auto ">
         <p>مدیریت سفارش ها</p>
-        <div className="flex w-96 gap-12">
-          <div className="flex gap-1 ">
-            <p className=" text-sm">سفارش های تحویل شده</p>
-            <input type="radio" />
-          </div>
-          <div className="flex gap-1">
-            <p className=" text-sm">سفارش های تحویل شده</p>
-            <input type="radio" />
-          </div>
-        </div>
+       <RadioButtons/>
       </div>
-      {/* modal  */}
+    
       <div
         className={
           modal
@@ -102,7 +105,6 @@ const OrdersManaging = () => {
                   <p> زمان تحویل:</p>
                   <p> 9/4/1401</p>
                 </div>
-
               </div>
               <div className="modal-footer space-y-5 mt-5">
                 <hr />
@@ -147,21 +149,32 @@ const OrdersManaging = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-              <td className="px-6 py-4">Black</td>
-              <td className="px-6 py-4">Accessories</td>
-              <td className="px-6 py-4">$99</td>
-              <td className="px-6 py-4 text-center pl-3">
-                <div className="modal-container relative">
-                  <p
-                    onClick={HandleModal}
-                    className="font-medium text-pink-600 dark:text-pink-500 hover:underline ml-3"
-                  >
-                    بررسی سفارش
-                  </p>
-                </div>
-              </td>
-            </tr>
+            {orderData.map((item) => {
+              return (
+                <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                  {item.products.map((data) => {
+                    return (
+                      <>
+                        <td className="px-6 py-4">{item.username}</td>
+                        <td className="px-6 py-4">${data.price}</td>
+                        <td className="px-6 py-4">{item.createdAt}</td>
+                      </>
+                    );
+                  })}
+                  
+                  <td className="px-6 py-4 text-center pl-3">
+                    <div className="modal-container relative">
+                      <p
+                        onClick={HandleModal}
+                        className="font-medium text-pink-600 dark:text-pink-500 hover:underline ml-3"
+                      >
+                        بررسی سفارش
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

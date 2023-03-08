@@ -1,5 +1,5 @@
 import React from 'react'
-// import OrdersManaging from '../../components/ordersManaging'
+import OrdersManaging from '../../components/admin/tabs/ordersManaging/index'
 // import ProductManaging from '../../components/productManaging'
 // import StockPriceManagment from '../../components/stockPriceManagment'
 // import { Route, Routes } from 'react-router-dom'

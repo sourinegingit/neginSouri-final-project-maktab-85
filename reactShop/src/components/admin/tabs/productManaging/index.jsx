@@ -2,6 +2,23 @@ import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
 const ProductManaging = () => {
+  
+  const tableData=[
+    {name:"بهاره",image:"",cat:'scarf',id:1},
+    {name:"بهاره",image:"",cat:'scarf',id:2},
+    {name:"بهاره",image:"",cat:'scarf',id:3},
+    {name:"بهاره",image:"",cat:'scarf',id:4},
+    {name:"بهاره",image:"",cat:'scarf',id:5},
+
+  ]
+
+
+  // remove item
+  const handleRemove = (id) => {
+    const filter=tableData.filter((item)=>item.id !==id);
+    
+  };
+
   const [modal, setModal] = useState(false);
   const HandleModal = () => {
     setModal(!modal);
@@ -29,7 +46,7 @@ const ProductManaging = () => {
             افزودن کالا
           </button>
         </div>
-{/* modal */}
+        {/* modal */}
         <div
           className={
             modal
@@ -40,7 +57,9 @@ const ProductManaging = () => {
           <div className="modal w-[30vw] p-4 bg-gray-100 shadow-2xl rounded-lg space-y-9 ">
             <div className="modal-header space-y-4 ">
               <div className="flex justify-between ">
-                <p className="text-[1.5rem] font-bold text-pink-800 ">افزودن/ویرایش کالا</p>
+                <p className="text-[1.5rem] font-bold text-pink-800 ">
+                  افزودن/ویرایش کالا
+                </p>
                 <div className="icon grid place-items-center cursor-pointer">
                   <AiOutlineClose onClick={HandleModal} />
                 </div>
@@ -105,12 +124,11 @@ const ProductManaging = () => {
                       htmlFor="text"
                       className="block mb-2 text-sm font-medium text-pimk-900 dark:text-white"
                     >
-                      
                       توضیحات:
                     </lable>
                     <div>
                       <textarea
-                       rows="4"
+                        rows="4"
                         id="text"
                         className="block p-2.5 w-full text-sm text-pimk-900 bg-pimk-50 outline-none
                         rounded-lg border border-pimk-300 focus:ring-pink-500
@@ -144,7 +162,6 @@ const ProductManaging = () => {
             </div>
           </div>
         </div>
-
       </div>
       <div className="w-[70%] relative overflow-x-auto shadow-xl sm:rounded-lg dir-rtl m-auto">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
@@ -165,63 +182,30 @@ const ProductManaging = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-              <td className="px-6 py-4 ">Silver</td>
-              <td className="px-6 py-4">Laptop</td>
-              <td className="px-6 py-4">$2999</td>
-              <td className="px-6 py-4 text-center pl-3">
-                <a
-                  href="#"
-                  className="font-medium text-pink-600 dark:text-pink-500 hover:underline ml-3"
-                >
-                  حذف
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-pink-600 dark:text-pink-500 hover:underline"
-                >
-                  ویرایش
-                </a>
-              </td>
-            </tr>
-            <tr className="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-              <td className="px-6 py-4">White</td>
-              <td className="px-6 py-4">Laptop PC</td>
-              <td className="px-6 py-4">$1999</td>
-              <td className="px-6 py-4 text-center pl-3">
-                <a
-                  href="#"
-                  className="font-medium text-pink-600 dark:text-pink-500 hover:underline ml-3"
-                >
-                  حذف
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-pink-600 dark:text-pink-500 hover:underline"
-                >
-                  ویرایش
-                </a>
-              </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-              <td className="px-6 py-4">Black</td>
-              <td className="px-6 py-4">Accessories</td>
-              <td className="px-6 py-4">$99</td>
-              <td className="px-6 py-4 text-center pl-3">
-                <a
-                  href="#"
-                  className="font-medium text-pink-600 dark:text-pink-500 hover:underline ml-3"
-                >
-                  حذف
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-pink-600 dark:text-pink-500 hover:underline"
-                >
-                  ویرایش
-                </a>
-              </td>
-            </tr>
+            {tableData.map((item) => () => {
+              return (
+                
+                <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                  <td className="px-6 py-4 ">{item.name}</td>
+                  <td className="px-6 py-4">{item.category}</td>
+                  <td className="px-6 py-4">${item.image}</td>
+                  <td className="px-6 py-4 text-center pl-3">
+                    <h2
+                      onClick={() => handleRemove()}
+                      className="font-medium text-pink-600 dark:text-pink-500 hover:underline ml-3"
+                    >
+                      حذف
+                    </h2>
+                    <h2
+                      href="#"
+                      className="font-medium text-pink-600 dark:text-pink-500 hover:underline"
+                    >
+                      ویرایش
+                    </h2>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

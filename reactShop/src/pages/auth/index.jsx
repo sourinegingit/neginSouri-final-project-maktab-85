@@ -19,6 +19,11 @@ const Auth = () => {
       ),
     }),
     onSubmit: (values) => {
+      const user={
+        username:values.userName,
+        password:values.password
+
+      }
       console.log(values);
       localStorage.setItem("userdata", JSON.stringify(values));
       navigate("/panelAdmin");

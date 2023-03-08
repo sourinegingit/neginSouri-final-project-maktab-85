@@ -1,6 +1,5 @@
-const { default: axios } = require("axios");
-
-class Http {
+import axios from 'axios'
+ class Http {
   constructor() {
     axios.interceptors.request.use(
       (config) => {
@@ -36,3 +35,4 @@ class Http {
     return axios.delete(url, config);
   }
 }
+export default Http
