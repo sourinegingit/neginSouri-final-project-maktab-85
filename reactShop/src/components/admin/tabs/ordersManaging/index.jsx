@@ -1,30 +1,59 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import RadioButtons from "../../filter";
-// import Http from "../../../../config";
+
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
 const OrdersManaging = () => {
+  const [selectedValue, setSelectedValue] = useState(0);
+  const [orderDate, setOrderData] = useState([]);
+  const handleChange = (event) => {
+    setSelectedValue(+event.target.value);
+    console.log(+event.target.value);
+  };
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/orders")
+      .then((res) => setOrderData(res.data));
+  }, []);
   const [modal, setModal] = useState(false);
-  const [orderData, setOrderData] = useState([]);
   const HandleModal = () => {
     setModal(!modal);
   };
-
-  useEffect(() => {
-    axios.get("http://localhost:3000/orders").then((res) =>
-      // console.log(res.data)
-      setOrderData(res.data)
-    );
-  }, []);
-
+  console.log(selectedValue);
   return (
     <div>
       <div className="flex justify-between items-center text-pink-800  text-xl w-[70%] -mt-10 m-auto ">
         <p>مدیریت سفارش ها</p>
-       <RadioButtons/>
+        
+        <div >
+          <FormControl className=" w-96 ">
+            <FormLabel id="demo-radio-buttons-group-label"> </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue=" تحویل نشده"
+              name="radio-buttons-group"
+            >
+             <div className="flex gap-3">
+             <FormControlLabel
+                value={1}
+                control={<Radio onChange={handleChange} />}
+                label="تحویل نشده"
+              />
+              <FormControlLabel
+                value={2}
+                control={<Radio onChange={handleChange} />}
+                label="تحویل شده"
+              />
+             </div>
+            </RadioGroup>
+          </FormControl>
+        </div>
       </div>
-    
       <div
         className={
           modal
@@ -130,9 +159,9 @@ const OrdersManaging = () => {
         </div>
       </div>
 
-      <div className="w-[70%] relative overflow-x-auto shadow-xl sm:rounded-lg dir-rtl m-auto">
+      <div className="w-[70%] mb-12 relative overflow-x-auto shadow-xl sm:rounded-lg dir-rtl m-auto">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-500">
             <tr>
               <th scope="col" className="px- py-3 pl-6">
                 نام کاربر
@@ -149,35 +178,92 @@ const OrdersManaging = () => {
             </tr>
           </thead>
           <tbody>
-            {orderData.map((item) => {
-              return (
-                <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                  {item.products.map((data) => {
-                    return (
-                      <>
-                        <td className="px-6 py-4">{item.username}</td>
-                        <td className="px-6 py-4">${data.price}</td>
-                        <td className="px-6 py-4">{item.createdAt}</td>
-                      </>
-                    );
-                  })}
-                  
-                  <td className="px-6 py-4 text-center pl-3">
-                    <div className="modal-container relative">
-                      <p
-                        onClick={HandleModal}
-                        className="font-medium text-pink-600 dark:text-pink-500 hover:underline ml-3"
-                      >
-                        بررسی سفارش
-                      </p>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
+            {selectedValue === 0 &&
+              orderDate.map((item) => {
+                return (
+                  <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    {item.products.map((data) => {
+                      return (
+                        <>
+                          <td className="px-6 py-4">{item.username}</td>
+                          <td className="px-6 py-4">{data.price}</td>
+                          <td className="px-6 py-4">{item.createdAt}</td>
+                        </>
+                      );
+                    })}
+
+                    <td className="px-6 py-4 text-center pl-3">
+                      <div className="modal-container relative">
+                        <p
+                          onClick={HandleModal}
+                          className="font-medium text-pink-600 dark:text-pink-500 hover:underline ml-3"
+                        >
+                          بررسی سفارش
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            {selectedValue === 1
+              ? orderDate.map((item) => {
+                  return (
+                    item.delivered && (
+                      <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        {item.products.map((data) => {
+                          return (
+                            <>
+                              <td className="px-6 py-4">{item.username}</td>
+                              <td className="px-6 py-4">{data.price}</td>
+                              <td className="px-6 py-4">{item.createdAt}</td>
+                            </>
+                          );
+                        })}
+                        <td className="px-6 py-4 text-center pl-3">
+                          <div className="modal-container relative">
+                            <p
+                              onClick={HandleModal}
+                              className="font-medium text-pink-600 dark:text-pink-500 hover:underline ml-3"
+                            >
+                              بررسی سفارش
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  );
+                })
+              : orderDate.map((item) => {
+                  return (
+                    !item.delivered && (
+                      <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        {item.products.map((data) => {
+                          return (
+                            <>
+                              <td className="px-6 py-4">{item.username}</td>
+                              <td className="px-6 py-4">{data.price}</td>
+                              <td className="px-6 py-4">{item.createdAt}</td>
+                            </>
+                          );
+                        })}
+                        <td className="px-6 py-4 text-center pl-3">
+                          <div className="modal-container relative">
+                            <p
+                              onClick={HandleModal}
+                              className="font-medium text-pink-600 dark:text-pink-500 hover:underline ml-3"
+                            >
+                              بررسی سفارش
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  );
+                })}
           </tbody>
         </table>
       </div>
+      
     </div>
   );
 };
