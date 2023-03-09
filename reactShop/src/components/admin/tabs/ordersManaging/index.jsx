@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-
+import '../../../admin/style.css'
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import ReactPaginate from "react-paginate";
+// import CustomPagination from "../../../pagination";
 
 const OrdersManaging = () => {
   const [selectedValue, setSelectedValue] = useState(0);
@@ -17,7 +19,7 @@ const OrdersManaging = () => {
   };
   useEffect(() => {
     axios
-      .get("http://localhost:3000/orders")
+      .get("http://localhost:3002/orders")
       .then((res) => setOrderData(res.data));
   }, []);
   const [modal, setModal] = useState(false);
@@ -25,35 +27,53 @@ const OrdersManaging = () => {
     setModal(!modal);
   };
   console.log(selectedValue);
+
+  //-----------------------------------------------------------
+  const [itemOffset, setItemOffset] = useState(0);
+  const endOffset = itemOffset + 3;
+  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  const currentItems = orderDate.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(orderDate.length / 3);
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * 3) % orderDate.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
   return (
     <div>
-      <div className="flex justify-between items-center text-pink-800  text-xl w-[70%] -mt-10 m-auto ">
+      <div className="flex justify-between items-center text-pink-800  text-xl w-[70%] -mt-18 m-auto ">
         <p>مدیریت سفارش ها</p>
-        
-        <div >
-          <FormControl className=" w-96 ">
+        {/* <RadioButtons
+          selectedValue={selectedValue}
+          setSelectedValue={setSelectedValue}
+        /> */}
+        <div>
+          <FormControl className=" w-64">
             <FormLabel id="demo-radio-buttons-group-label"> </FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue=" تحویل نشده"
+              defaultValue="نشده تحویل"
               name="radio-buttons-group"
             >
-             <div className="flex gap-3">
-             <FormControlLabel
-                value={1}
-                control={<Radio onChange={handleChange} />}
-                label="تحویل نشده"
-              />
-              <FormControlLabel
-                value={2}
-                control={<Radio onChange={handleChange} />}
-                label="تحویل شده"
-              />
-             </div>
+              <div className="flex gap-3">
+                <FormControlLabel
+                  value={1}
+                  control={<Radio onChange={handleChange} />}
+                  label="تحویل نشده"
+                />
+                <FormControlLabel
+                  value={2}
+                  control={<Radio onChange={handleChange} />}
+                  label="تحویل نشده"
+                />
+              </div>
             </RadioGroup>
           </FormControl>
         </div>
       </div>
+      {/* modal  */}
       <div
         className={
           modal
@@ -179,7 +199,7 @@ const OrdersManaging = () => {
           </thead>
           <tbody>
             {selectedValue === 0 &&
-              orderDate.map((item) => {
+              currentItems.map((item) => {
                 return (
                   <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                     {item.products.map((data) => {
@@ -187,7 +207,7 @@ const OrdersManaging = () => {
                         <>
                           <td className="px-6 py-4">{item.username}</td>
                           <td className="px-6 py-4">{data.price}</td>
-                          <td className="px-6 py-4">{item.createdAt}</td>
+                          <td className="px-6 py-4">{new Date(item.createdAt).toLocaleDateString('fa-Ir')}</td>
                         </>
                       );
                     })}
@@ -206,7 +226,7 @@ const OrdersManaging = () => {
                 );
               })}
             {selectedValue === 1
-              ? orderDate.map((item) => {
+              ? currentItems.map((item) => {
                   return (
                     item.delivered && (
                       <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
@@ -215,7 +235,7 @@ const OrdersManaging = () => {
                             <>
                               <td className="px-6 py-4">{item.username}</td>
                               <td className="px-6 py-4">{data.price}</td>
-                              <td className="px-6 py-4">{item.createdAt}</td>
+                              <td className="px-6 py-4">{new Date(item.createdAt).toLocaleDateString('fa-Ir')}</td>
                             </>
                           );
                         })}
@@ -233,7 +253,7 @@ const OrdersManaging = () => {
                     )
                   );
                 })
-              : orderDate.map((item) => {
+              : currentItems.map((item) => {
                   return (
                     !item.delivered && (
                       <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
@@ -242,7 +262,7 @@ const OrdersManaging = () => {
                             <>
                               <td className="px-6 py-4">{item.username}</td>
                               <td className="px-6 py-4">{data.price}</td>
-                              <td className="px-6 py-4">{item.createdAt}</td>
+                              <td className="px-6 py-4">{new Date(item.createdAt).toLocaleDateString('fa-Ir')}</td>
                             </>
                           );
                         })}
@@ -263,7 +283,19 @@ const OrdersManaging = () => {
           </tbody>
         </table>
       </div>
-      
+      <div className="mt-10 flex justify-center items-center text-white">
+      <ReactPaginate
+        className="pagination flex gap-4 flex-row-reverse bg-pink-600 p-5 rounded-2xl "
+          breakLabel="..."
+          nextLabel="بعد > "
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="< قبل"
+          renderOnZeroPageCount={null}
+          activeClassName='activePagination' 
+        />
+        </div>
     </div>
   );
 };
