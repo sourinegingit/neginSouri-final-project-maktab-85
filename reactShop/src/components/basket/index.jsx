@@ -99,7 +99,7 @@ const Basket = () => {
     </div>
     <div className="flex justify-between   text-pink-800  text-xl w-[70%] mt-28 m-auto ">
       <p>جمع: 1863تومان</p>
-      <Link to='/finalbasket'><button className="py-2.5 px-14 text-center mr-32 mb-11 text-sm 
+      <Link to='/finalAuth'><button className="py-2.5 px-14 text-center mr-32 mb-11 text-sm 
                     font-medium  focus:outline-none
                      bg-pink-400  rounded-full border border-none
                       hover:bg-pink-300 hover:text-pink-700 
