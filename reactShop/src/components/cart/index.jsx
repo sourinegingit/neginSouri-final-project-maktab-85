@@ -1,45 +1,49 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { cartActions } from "../../redux/feature/basketSlice";
 
-const Cart = ({ item ,setCart,product}) => {
-  let localStorageCart=[]
+const Cart = ({ item }) => {
+  const { name, price, id, quantity } = item;
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(
+      cartActions.addItemToCart({
+        id,
+        name,
+        price,
+        quantity
+      })
+    );
+  };
   
-  const handleAddToCart=()=>{
-    localStorageCart=JSON.parse(localStorage.getItem("cartData"));
-    localStorageCart=localStorageCart || [];
-
-    const productFind=localStorageCart.findIndex((item)=>item.id==item.id)
-  //  console.log(productFind)
-
-    if(productFind >= 0){
-      localStorageCart[productFind].count+=1
-    }else{
-      localStorageCart.push({...product, count: 1})
-    }
-
-    localStorage.setItem("cartData", JSON.stringify(localStorageCart));
-    setCart(localStorageCart)
-  }
 
   return (
     <article className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
-      <Link to="/productDetail" item={item}>
-        <div
-          className="relative flex  overflow-hidden rounded-xl gap-4 items-center justify-center">
+      <Link to={`/productDetail/${id}`} item={item}>
+        <div className="relative flex  overflow-hidden rounded-xl gap-4 items-center justify-center">
           <img
-            src={item.image[0]}
+            src={`http://localhost:3002/files/${
+              item?.image[0] && item?.image[0]
+            }`}
             alt="close Photo"
             className="w-28 h-28 rounded-2"
           />
-          <div>
-            <h2 className="text-slate-700">{item.brand}</h2>
-            <p className="mt-1 text-sm text-slate-400">{item.name}</p>
+          <div >
+            <p className="mt-1 text-sm text-slate-400 mb-3">
+              {item?.name && item?.name}
+            </p>
+            <div className="flex gap-1">
+              <h2 className="text-slate-700">{item?.price && item?.price}</h2>
+              <p>تومان</p>
+            </div>
           </div>
         </div>
       </Link>
       <div className="mt-1 p-2">
         <div className="mt-3 flex items-center justify-center">
-          <div class="flex items-center space-x-1.5 rounded-lg bg-pink-500 px-4 py-1.5 text-white duration-100 hover:bg-pink-600">
+          <div className="flex items-center space-x-1.5 rounded-lg bg-orange-500 px-4 py-1.5 text-white duration-100 hover:bg-orange-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -55,7 +59,9 @@ const Cart = ({ item ,setCart,product}) => {
               />
             </svg>
 
-            <button className="text-sm " onClick={handleAddToCart}>اضافه به سبد خرید</button>
+            <button className="text-sm " onClick={handleAddToCart}>
+              اضافه به سبد خرید
+            </button>
           </div>
         </div>
       </div>
