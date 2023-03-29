@@ -11,13 +11,13 @@ const NotFound = () => {
       w-screen
       h-screen
       bg-gradient-to-r
-      from-pink-200
-      to-pink-300
+      from-orange-200
+      to-orange-300
     "
     >
       <div className="px-40 py-20 bg-white rounded-md shadow-xl">
         <div className="flex flex-col items-center">
-          <h1 className="font-bold text-pink-600 text-9xl">404</h1>
+          <h1 className="font-bold text-orange-600 text-9xl">404</h1>
 
           <h6 className="mb-2 text-2xl font-bold text-center text-gray-800 md:text-3xl">
             <span className="text-red-500">Oops!</span> Page not found
@@ -29,7 +29,7 @@ const NotFound = () => {
 
           <a
             href="#"
-            className="px-6 py-2 text-sm font-semibold text-pink-800 bg-pink-100"
+            className="px-6 py-2 text-sm font-semibold text-orange-800 bg-orange-100"
           >
             <Link to="/">Go home</Link>
           </a>
