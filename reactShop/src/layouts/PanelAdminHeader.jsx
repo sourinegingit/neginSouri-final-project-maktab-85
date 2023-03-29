@@ -33,13 +33,13 @@ const PanelAdminHeader = () => {
 
   return (
     <>
-      <nav className="w-full bg-white shadow mb-15">
+      <nav className="w-full shadow mb-20 bg-gray-500 h-20">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <div className="flex items-center justify-between gap-4">
                 <a href="javascript:void(0)">
-                  <h4 className="text-xl font-bold text-pink-800">
+                  <h4 className="text-xl font-bold text-white">
                     
                     پنل مدیریت فروشگاه
                   </h4>
@@ -96,8 +96,8 @@ const PanelAdminHeader = () => {
                   return (
                     <li
                       onClick={() => handleClick(item.id)}
-                      className={`text-gray-600 flex items-center justify-center gap-2 hover:bg-slate-300 w-34 p-2 h-8 hover:text-pink-600 rounded-xl ${
-                        currentTab === item.id ? "bg-red-500" : ""
+                      className={`text-white flex items-center justify-center gap-2 hover:bg-orange-500 w-34 p-2 h-8 hover:text-white rounded-xl ${
+                        currentTab === item.id ? "bg-orange-500" : ""
                       }`}
                     >
                       {item.name}
@@ -115,7 +115,7 @@ const PanelAdminHeader = () => {
               }`}
             >
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0 gap-12">
-                <li className="text-gray-600 hover:text-pink-600 flex items-center justify-center gap-2">
+                <li className="text-white hover:text-orange-600 flex items-center justify-center gap-2">
                   <Link to="/">بازگشت به سایت</Link>
                 </li>
               </ul>

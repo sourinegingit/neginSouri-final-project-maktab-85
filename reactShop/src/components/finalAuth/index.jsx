@@ -39,32 +39,32 @@ const FinalAuth = () => {
  
     }),
     onSubmit: (values) => {
-      console.log(values);
+  
       localStorage.setItem("userdata", JSON.stringify(values));
       navigate("/panelAdmin");
     }
   });
   return (
     <div className="overscroll-y-none h-[18%] mt-3">
-      <h1 className="text-pink-800 mr-96 font-bold">نهایی کردن خرید</h1>
+      <h1 className="text-orange-800 mr-96 font-bold">نهایی کردن خرید</h1>
       <div className=" flex flex-col px-6  mx-auto  lg:py-0 items-center ">
           <div className=" flex justify-center items-center p-6 space-y-4 md:space-y-6">
             <form
               onSubmit={formik.handleSubmit}
-              className=" bg-pink-100 w-[48rem] rounded-lg shadow-2xl dark:border border-pink-400 
+              className=" bg-orange-100 w-[48rem] rounded-lg shadow-2xl dark:border border-orange-400 
             border-2 md:mt-0 space-y-4   p-3 "
             >
               <div className="flex justify-around">
                <div className="flex-col w-[40%]">
                <label
                   htmlFor="userName"
-                  className="block mb-2 text-sm font-medium text-pink-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-orange-900 dark:text-white"
                 >
                   نام کربری
                 </label>
                 <input
-                  className="bg-pink-50 border mb-2 border-pink-300 text-pink-900 sm:text-sm rounded-lg
-               focus:border-pink-600 focus:outline-none  block w-full p-2.5 
+                  className="bg-orange-50 border mb-2 border-orange-300 text-orange-900 sm:text-sm rounded-lg
+               focus:border-orange-600 focus:outline-none  block w-full p-2.5 
           dark:"
                   id="userName"
                   name="userName"
@@ -81,13 +81,13 @@ const FinalAuth = () => {
               <div className="flex-col w-[40%]">
               <label
                   htmlFor="lastName"
-                  className="block mb-2 text-sm font-medium text-pink-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-orange-900 dark:text-white"
                 >
             نام خانوادگی:
                 </label>
                 <input
-                  className="bg-pink-50 mb-2 border border-pink-300 text-pink-900 sm:text-sm rounded-lg
-                      focus:border-pink-600 focus:outline-none  block w-full p-2.5 
+                  className="bg-orange-50 mb-2 border border-orange-300 text-orange-900 sm:text-sm rounded-lg
+                      focus:border-orange-600 focus:outline-none  block w-full p-2.5 
                  dark:"
                   id="lastName"
                   type="text"
@@ -107,13 +107,13 @@ const FinalAuth = () => {
                <div className="flex-col w-[40%]">
                <label
                   htmlFor="address"
-                  className="block mb-2 text-sm font-medium text-pink-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-orange-900 dark:text-white"
                 >
                 آدرس
                 </label>
                 <input
-                  className="bg-pink-50 h-20 border mb-2 border-pink-300 text-pink-900 sm:text-sm rounded-lg
-               focus:border-pink-600 focus:outline-none  block w-full p-2.5 
+                  className="bg-orange-50 h-20 border mb-2 border-orange-300 text-orange-900 sm:text-sm rounded-lg
+               focus:border-orange-600 focus:outline-none  block w-full p-2.5 
           dark:"
                   id="address"
                   name="address"
@@ -130,13 +130,13 @@ const FinalAuth = () => {
               <div className="flex-col w-[40%]">
               <label
                   htmlFor="phoneNumber"
-                  className="block mb-2 text-sm font-medium text-pink-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-orange-900 dark:text-white"
                 >
          تلفن همراه:
                 </label>
                 <input
-                  className="bg-pink-50 mb-2 border border-pink-300 text-pink-900 sm:text-sm rounded-lg
-                      focus:border-pink-600 focus:outline-none  block w-full p-2.5 
+                  className="bg-orange-50 mb-2 border border-orange-300 text-orange-900 sm:text-sm rounded-lg
+                      focus:border-orange-600 focus:outline-none  block w-full p-2.5 
                  dark:"
                   id="phoneNumber"
                   type="text"
@@ -151,13 +151,13 @@ const FinalAuth = () => {
               <div className="flex-col w-[41.5%]">
               <label
                   htmlFor="dateofdelivery"
-                  className="block mb-2 text-sm font-medium text-pink-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-orange-900 dark:text-white"
                 >
          تاریخ تحویل :
                 </label>
                 <input
-                  className="bg-pink-50 mb-2 border border-pink-300 text-pink-900 sm:text-sm rounded-lg
-                      focus:border-pink-600 focus:outline-none  block w-full p-2.5 
+                  className="bg-orange-50 mb-2 border border-orange-300 text-orange-900 sm:text-sm rounded-lg
+                      focus:border-orange-600 focus:outline-none  block w-full p-2.5 
                  dark:"
                   id="dateofdelivery"
                   type="text"
@@ -174,13 +174,13 @@ const FinalAuth = () => {
                 type="submit"
                 className="py-2 px-24 text-center mr-[16rem] mb-11 text-sm 
                     font-medium  focus:outline-none
-                     bg-pink-400  rounded-xl border border-none
-                      hover:bg-pink-300 hover:text-pink-700 
-                      focus:z-10 focus:ring-4 focus:ring-pink-200
-                       dark:focus:ring-pink-700 dark:bg-pink-800
-                        dark:text-pink-400
-                     dark:border-pink-600 dark:hover:text-white
-                      dark:hover:bg-pink-700
+                     bg-orange-400  rounded-xl border border-none
+                      hover:bg-orange-300 hover:text-orange-700 
+                      focus:z-10 focus:ring-4 focus:ring-orange-200
+                       dark:focus:ring-orange-700 dark:bg-orange-800
+                        dark:text-orange-400
+                     dark:border-orange-600 dark:hover:text-white
+                      dark:hover:bg-orange-700
                       text-white"
               >
                 پرداخت
@@ -190,7 +190,7 @@ const FinalAuth = () => {
                 <button
                   to="/"
                   className="flex flex-row-reverse
-               items-end text-pink-900 hover:text-red-500"
+               items-end text-orange-900 hover:text-red-500"
                 >
                   بازگشت به سایت
                 </button>

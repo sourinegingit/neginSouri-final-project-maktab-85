@@ -3,11 +3,13 @@ import shop from '../assets/shop2.webp'
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Search from '../components/Search'
+import { useSelector } from "react-redux";
 const MainHeader = () => {
   const [navbar, setNavbar] = useState(false);
+  const cartQuantity=useSelector(state=>state.cart.totalQuantity)
 
   return (
-    <nav className="w-full h-24 p-5 shadow bg-gray-300">
+    <nav className="w-full h-24 p-5 shadow  bg-gray-500">
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -18,13 +20,13 @@ const MainHeader = () => {
                 className="shadow  w-12 rounded-full h-auto align-middle border-none -mt-2"
               />
 
-              <a href="javascript:void(0)">
-                <h4 className="text-xl font-bold text-pink-800"> فروشگاه لباس و پوشاک </h4>
-              </a>
+              
+                <h4 className="text-xl font-bold text-white"> فروشگاه لباس و پوشاک </h4>
+            
             </div>
             <div className="md:hidden">
               <button
-                className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
+                className="p-2 text-orange-500 rounded-md outline-none focus:border-orange-500 focus:border"
                 onClick={() => setNavbar(!navbar)}
               >
                 {navbar ? (
@@ -66,17 +68,21 @@ const MainHeader = () => {
 
         <div>
           <div
-            className={`flex-1 justify-self-center pb-1 mt-1 md:block md:pb-0 md:mt-0 ${
+            className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
               navbar ? "block" : "hidden"
             }`}
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0 gap-12">
-              <li className="text-pink-800 hover:text-pink-600">
+              <li className="text-white hover:text-orange-500">
                 <Link to="/auth">مدیریت</Link>
               </li>
-              <li className="text-pink-800 hover:text-pink-600 flex items-center justify-center gap-2">
+              <li className="text-white hover:text-orange-500 flex items-center justify-center gap-2">
+            
+                
+                <span  className=" -mt-5">{cartQuantity}</span>
                 <FaShoppingCart />
                 <Link to='/basket'>سبد خرید</Link>
+               
               </li>
             </ul>
           </div>

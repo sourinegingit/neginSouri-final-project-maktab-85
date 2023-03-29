@@ -32,7 +32,11 @@ const OrdersManaging = () => {
       .then((res) => setLength(res.data.length));
   }, [isDelivered]);
 
+<<<<<<< HEAD
 // --------------------modal----------------------------------------
+=======
+  ////////////////////////////////////////////////////////////
+>>>>>>> develope
   const [modal, setModal] = useState(false);
   const HandleModal = (item) => {
     setOrder(item);
@@ -75,7 +79,11 @@ const OrdersManaging = () => {
 
   const HandelDeliver = async(order) => {
     const editItem = { ...order, delivered: true };
+<<<<<<< HEAD
     // console.log(editItem);
+=======
+  
+>>>>>>> develope
    await axios.patch(`http://localhost:3002/orders/${order.id}`, editItem);
     setModal(false);
     axios
@@ -100,7 +108,11 @@ const OrdersManaging = () => {
 
   return (
     <div>
+<<<<<<< HEAD
       <div className="flex justify-between items-center text-pink-800  text-xl w-[70%] -mt-10 m-auto ">
+=======
+      <div className="flex justify-between items-center text-orange-800  text-xl w-[70%] -mt-10 m-auto ">
+>>>>>>> develope
         <p>مدیریت سفارش ها</p>
         <div>
           <FormControl className=" w-64">
@@ -160,7 +172,11 @@ const OrdersManaging = () => {
                     <div className="modal-container relative">
                       <p
                         onClick={() => HandleModal(item)}
+<<<<<<< HEAD
                         className="font-medium text-pink-600 dark:text-pink-500 hover:underline ml-3"
+=======
+                        className="font-medium text-orange-600 dark:text-orange-500 hover:underline ml-3"
+>>>>>>> develope
                       >
                         بررسی سفارش
                       </p>
@@ -190,14 +206,22 @@ const OrdersManaging = () => {
         <div
           className={
             modal
+<<<<<<< HEAD
               ? "bg-modal absolute w-[100%] top-0 right-0 h-[100vh] bg-pink-200 bg-opacity-80 grid place-items-center z-50 "
+=======
+              ? "bg-modal absolute w-[100%] top-0 right-0 h-[100vh] bg-orange-200 bg-opacity-80 grid place-items-center z-50 "
+>>>>>>> develope
               : "hidden"
           }
         >
           <div className="modal w-[30vw] p-4 bg-gray-100 shadow-2xl rounded-lg space-y-9 ">
             <div className="modal-header space-y-4 ">
               <div className="flex justify-between ">
+<<<<<<< HEAD
                 <p className="text-[1.5rem] font-bold text-pink-800 ">
+=======
+                <p className="text-[1.5rem] font-bold text-orange-800 ">
+>>>>>>> develope
                   نمایش سفارش
                 </p>
                 <div className="icon grid place-items-center cursor-pointer">
@@ -271,7 +295,11 @@ const OrdersManaging = () => {
                     ) : (
                       <button
                         onClick={() => HandelDeliver(order)}
+<<<<<<< HEAD
                         className="bg-green-700 w-[8rem] p-2 rounded-md text-[1.2rem] text-white  focus:border-pink-500"
+=======
+                        className="bg-green-700 w-[8rem] p-2 rounded-md text-[1.2rem] text-white  focus:border-orange-500"
+>>>>>>> develope
                       >
                         تحویل شد
                       </button>
@@ -288,3 +316,7 @@ const OrdersManaging = () => {
 };
 
 export default OrdersManaging;
+<<<<<<< HEAD
+=======
+
+>>>>>>> develope
